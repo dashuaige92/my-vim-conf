@@ -1,0 +1,42 @@
+[submodule "bundle/delimitMate"]
+    path = bundle/delimitMate
+	url = https://github.com/Raimondi/delimitMate.git
+[submodule "bundle/django.vim"]
+    path = bundle/django.vim
+	url = https://github.com/vim-scripts/django.vim.git
+[submodule "bundle/genutils"]
+    path = bundle/genutils
+	url = https://github.com/vim-scripts/genutils.git
+[submodule "bundle/multiselect"]
+    path = bundle/multiselect
+	url = https://github.com/vim-scripts/multiselect.git
+[submodule "bundle/nerdcommenter"]
+    path = bundle/nerdcommenter
+	url = https://github.com/scrooloose/nerdcommenter.git
+[submodule "bundle/nerdtree"]
+    path = bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "bundle/snipmate.vim"]
+    path = bundle/snipmate.vim
+	url = https://github.com/msanders/snipmate.vim.git
+[submodule "bundle/tagbar"]
+    path = bundle/tagbar
+	url = https://github.com/majutsushi/tagbar.git
+[submodule "bundle/vim-fugitive"]
+    path = bundle/vim-fugitive
+	url = git://github.com/tpope/vim-fugitive.git
+[submodule "bundle/vim-matchit"]
+    path = bundle/vim-matchit
+	url = https://github.com/tsaleh/vim-matchit.git
+[submodule "bundle/vim-ragtag"]
+    path = bundle/vim-ragtag
+	url = https://github.com/tpope/vim-ragtag.git
+[submodule "bundle/vim-repeat"]
+    path = bundle/vim-repeat
+	url = git://github.com/tpope/vim-repeat.git
+[submodule "bundle/vim-surround"]
+    path = bundle/vim-surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "bundle/vim-togglemouse"]
+    path = bundle/vim-togglemouse
+	url = https://github.com/nvie/vim-togglemouse.git
