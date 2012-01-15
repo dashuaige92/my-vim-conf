@@ -24,7 +24,7 @@
 	url = git://github.com/tpope/vim-fugitive.git
 [submodule "bundle/vim-matchit"]
     path = bundle/vim-matchit
-	url = https://github.com/tsaleh/vim-matchit.git
+	url = git@github.com:dashuaige92/vim-matchit.git
 [submodule "bundle/vim-ragtag"]
     path = bundle/vim-ragtag
 	url = https://github.com/tpope/vim-ragtag.git
