@@ -4,14 +4,13 @@ filetype plugin indent on
 noremap <F4> :NERDTree <CR>
 noremap <C-C> :MSClear <CR>
 noremap <C-O> :MSExecNormalCmd 
-noremap <F7> :set filetype=html <CR>
-noremap <F8> :set filetype=django <CR>
-noremap <F9> :so ~/.vimrc <CR>
+noremap <F8> :setlocal shiftwidth=2 tabstop=2 <CR>
 
 noremap <F5> :ConqueTermTab python manage.py runserver 0.0.0.0:8000 <CR>
 
 set runtimepath-=~/.vim/bundle/autoclose
-autocmd FileType html setlocal shiftwidth=2 tabstop=2
+"autocmd FileType html :setlocal shiftwidth=2 tabstop=2
+autocmd FileType html <F8>
 
 inoremap	kj	<Esc>
 inoremap	<Left>	<NOP>
