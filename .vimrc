@@ -24,40 +24,79 @@ let g:miniBufExplUseSingleClick = 1
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplVSplit = 25
 let g:miniBufExplSplitBelow=1
-noremap <c-w><c-t> :WMToggle<cr>
+noremap <c-w><c-t> :WMToggle <CR>
 
 " tagbar config
 let g:Tlist_WinWidth = 50
 noremap <F3> :TagbarToggle <CR>
 set tags=./tags;/
 "set tags+=/usr/local/share/ctags/qt4
-noremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
-noremap <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+noremap <C-\> :tab split <CR> :exec("tag ".expand("<cword>")) <CR>
+noremap <A-]> :vsp <CR> :exec("tag ".expand("<cword>")) <CR>
 
 
 " KEYMAPPINGS
 inoremap	kj	<Esc>
-inoremap	<Left>	<NOP>
-inoremap	<Down>	<NOP>
-inoremap	<Up>	<Esc>:w<CR>
-inoremap	<Right>	<NOP>
+inoremap	kkj	<Esc>:w <CR>
+"inoremap	<Left>	<NOP>
+"inoremap	<Down>	<NOP>
+"inoremap	<Up>	<Esc>:w <CR>
+"inoremap	<Right>	<NOP>
 
-"noremap <F5> :ConqueTermTab python manage.py runserver 0.0.0.0:8000 <CR>
-":set pastetoggle=<F6>
-noremap <F2> :set number! <CR>
 noremap <F7> :set filetype=html <CR>
-noremap <F9> :so ~/.vimrc <CR>
-noremap <C-C> :Bclose <CR>
-noremap <C-J> a<CR><Esc>k$
+noremap <F9> :so ~/.vimrc <CR> :e <CR>
+noremap <C-J> a <CR><Esc>k$
 
 " <leader> additions
-noremap <leader>td :tabnew %<cr>
-noremap <leader>tn :tabnew<cr>
-noremap <leader>tc :tabclose<cr>
+"sorts
+noremap <leader>rv :g/fun\%[ction]!\= /,/endf\%[unction]/ s/$\n/@@@<CR> :'<,'>sort /fun=%[ction]!\=/<CR> :%s/@@@/\r/g<CR>
+noremap <leader>rs :s/$\n/@@@<CR> :s/@@@snippet/\rsnippet/g<CR> :'<,'>sort<CR> :%s/@@@/\r/g<CR>
+
+noremap <leader>rd :s/$\n/@@@<CR> :s/@@@def/\r/g<CR> :'<,'>sort<CR> :%s/@@@/\r/g<CR>
+noremap <leader>rf :s/$\n/@@@<CR> :s/@@@function/\r/g<CR> :'<,'>sort<CR> :%s/@@@/\r/g<CR>
+"buffer
+noremap <leader>bc :Bclose! <CR>
+noremap <leader>bf <C-W><C-L><C-W><C-C>gt <CR>
+noremap <leader>bq :Bclose <CR>
+"vim-fugitive
+noremap <leader>ga :Gwrite <CR>
+noremap <leader>gc :Gcommit <CR>
+noremap <leader>gd :Gdiff <CR>
+noremap <leader>go :Gread <CR>
+noremap <leader>gb :Gblame <CR>
+noremap <leader>gk :Git pull <CR>
+noremap <leader>gj :Git push <CR>
+noremap <leader>gm :Gmove 
+noremap <leader>gp :Git pull <CR> :Git push <CR>
+noremap <leader>gr :Gremove <CR>
+noremap <leader>gs :Gstatus <CR>
+"external cmds
+noremap <leader>mt :!pdflatex % <CR>
+noremap <leader>mm :!make <CR>
+"option toggles
+noremap <leader>on :set number! <CR>
+noremap <leader>op :set paste! <CR>
+noremap <leader>oh :set hlsearch! <CR>
+noremap <leader>oc :set @/ = "" <CR>
+"tabs
+noremap <leader>td :tabnew % <CR>
+noremap <leader>tn :tabnew <CR>
+noremap <leader>tc :tabclose! <CR>
+noremap <leader>tq :tabclose <CR>
 noremap <leader>tm :tabmove 
-noremap <leader>ss :mksession<cr>
-noremap <leader>sc :w<cr>:tabclose<cr>
-noremap <leader>sq :wqa<cr>
+noremap <leader>wc <C-W>c
+"saving
+noremap <leader>sc :w <CR> :tabclose <CR>
+noremap <leader>st :w <CR>
+noremap <leader>ss :wa <CR>
+noremap <leader>sq :wqa <CR>
+"quitting
+noremap <leader>qc :qa! <CR>
+noremap <leader>qq :qa <CR>
+noremap <leader>qr :!rm % <CR> :tabclose <CR>
+noremap <leader>qs :mksession! <CR>
+noremap <leader>qt :q <CR>
+noremap <leader>qw <C-W><C-C> <CR>
 
 
 " command-line remappings
@@ -93,8 +132,8 @@ set tabstop=4 shiftwidth=4 expandtab
 
 set ignorecase
 set incsearch
-set hlsearch
+"set hlsearch
 set wildmenu
 
-set ssop-="options "
+set ssop-="options"
 set ssop-="folds "
