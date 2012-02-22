@@ -12,9 +12,14 @@ set runtimepath-=~/.vim/bundle/minibufexpl
 "noremap <C-O> :MSExecNormalCmd 
 
 " NERDTree config
+let g:NERDTreeIgnore = ['\.pyc$', '\.aux']
 let g:nerdtree_tabs_open_on_console_startup = 1
 let g:NERDTreeShowLineNumbers = 1
 noremap <F4> :NERDTreeToggle <CR>
+
+" vim-fugitive config
+autocmd BufReadPost fugitive://* set bufhidden=delete
+set statusline=%<%f\ %n\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 " minibufexpl.vim config
 let g:miniBufExplModSelTarget = 1
@@ -24,7 +29,7 @@ let g:miniBufExplUseSingleClick = 1
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplVSplit = 25
 let g:miniBufExplSplitBelow=1
-noremap <c-w><c-t> :WMToggle<cr>
+noremap <c-w><c-t> :WMToggle<CR>
 
 " tagbar config
 let g:Tlist_WinWidth = 50
@@ -37,27 +42,48 @@ noremap <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 " KEYMAPPINGS
 inoremap	kj	<Esc>
-inoremap	<Left>	<NOP>
-inoremap	<Down>	<NOP>
-inoremap	<Up>	<Esc>:w<CR>
-inoremap	<Right>	<NOP>
+inoremap	kkj	<Esc>:w<CR>
+"inoremap	<Left>	<NOP>
+"inoremap	<Down>	<NOP>
+"inoremap	<Up>	<Esc>:w<CR>
+"inoremap	<Right>	<NOP>
+inoremap    <A-S>   <Esc>:wa<CR>
 
 "noremap <F5> :ConqueTermTab python manage.py runserver 0.0.0.0:8000 <CR>
 ":set pastetoggle=<F6>
-noremap <F2> :set number! <CR>
 noremap <F7> :set filetype=html <CR>
-noremap <F9> :so ~/.vimrc <CR>
-noremap <C-C> :Bclose <CR>
+noremap <F9> :so ~/.vimrc <CR> :e<CR>
 noremap <C-J> a<CR><Esc>k$
 
+" sort
+"noremap <leader>rs :s/\(snippet.*\)\n/\1@@@/<CR> 
+noremap <leader>rd :s/\n\(^[^def].*\)/@@@\1/<CR> :'<,'>sort<CR> :'<,'>s/@@@/\r/g<CR>
+noremap <leader>rf :s/\n\(^[^function].*\)/@@@\1/<CR> :'<,'>sort<CR> :'<,'>s/@@@/\r/g<CR>
+noremap <leader>rs :s/\n\(^[^snippet].*\)/@@@\1/<CR> :'<,'>sort<CR> :'<,'>s/@@@/\r/g<CR>
+
+noremap <leader>g2 :diffget //2 <CR> diffupdate <CR>
+noremap <leader>g3 :diffget //3 <CR> diffupdate <CR>
+noremap <leader>gd :Gdiff <CR>
+noremap <leader>go :only <CR> :NERDTree <CR>
+
 " <leader> additions
-noremap <leader>td :tabnew %<cr>
-noremap <leader>tn :tabnew<cr>
-noremap <leader>tc :tabclose<cr>
+noremap <leader>mm :!chmod +x %<CR>
+noremap <leader>mt :!pdflatex %<CR>
+noremap <leader>mx :!./%<CR>
+noremap <leader>op :set paste!<CR>
+noremap <leader>on :set number!<CR>
+
+noremap <leader>qq :qa!<CR>
+noremap <leader>qs :mksession<CR>:wqa<CR>
+noremap <leader>sc :w<CR>:tabclose<CR>
+noremap <leader>sq :wqa<CR>
+noremap <leader>ss :wa<CR>
+
+noremap <leader>tb :Bclose<CR>
+noremap <leader>tc :tabclose<CR>
+noremap <leader>td :tabnew %<CR>
 noremap <leader>tm :tabmove 
-noremap <leader>ss :mksession<cr>
-noremap <leader>sc :w<cr>:tabclose<cr>
-noremap <leader>sq :wqa<cr>
+noremap <leader>tn :tabnew<CR>
 
 
 " command-line remappings
@@ -85,16 +111,21 @@ set autoindent autoread autowrite
 set formatoptions+=r
 set foldmethod=indent
 set foldlevel=99
+highlight Folded guibg=black guifg=grey
 
 set mouse=a
 
 set smartindent
 set tabstop=4 shiftwidth=4 expandtab
 
-set ignorecase
+set smartcase
 set incsearch
-set hlsearch
+"set hlsearch
 set wildmenu
 
+" session config
 set ssop-="options "
 set ssop-="folds "
+
+"set nobackup
+set directory=~/.vim/swap
