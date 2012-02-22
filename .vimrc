@@ -1,6 +1,13 @@
 call pathogen#infect()
 syntax on
 filetype plugin indent on
+" vim-colors-solarized setup
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
+colorscheme solarized
 
 " PLUGIN CONFIGS AND MAPPINGS
 set runtimepath-=~/.vim/bundle/autoclose
