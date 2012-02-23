@@ -2,12 +2,12 @@ call pathogen#infect()
 syntax on
 filetype plugin indent on
 " vim-colors-solarized setup
-if has('gui_running')
-    set background=light
-else
+"if has('gui_running')
     set background=dark
-endif
-colorscheme solarized
+"else
+    "set background=""
+"endif
+"colorscheme solarized
 
 " PLUGIN CONFIGS AND MAPPINGS
 set runtimepath-=~/.vim/bundle/autoclose
@@ -111,7 +111,7 @@ noremap <leader>ss :wa <CR>
 noremap <leader>st :w <CR>
 noremap <leader>sq :wqa <CR>
 "tabs
-noremap <leader>tb :Bclose<CR>
+noremap <leader>tb :tab ball <CR>
 noremap <leader>tc :tabclose! <CR>
 noremap <leader>td :tabnew % <CR>
 noremap <leader>tm :tabmove 
@@ -132,7 +132,7 @@ au BufRead,BufNewFile *.js set ft=javascript.html
 au BufRead,BufNewFile *.html set ft=html.javascript
 autocmd FileType html :setlocal shiftwidth=2 tabstop=2
 autocmd FileType tex :setlocal shiftwidth=2 tabstop=2 noexpandtab
-"autocmd FileType html <F8>
+autocmd FileType python :inoremap # X#
 "autocmd Syntax c,cpp,vim,xml,html,xhtml setlocal foldmethod=indent
 "autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
 "au BufWinLeave * mkview
