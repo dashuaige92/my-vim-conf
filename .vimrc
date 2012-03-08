@@ -39,7 +39,10 @@ let g:miniBufExplSplitBelow=1
 noremap <c-w><c-t> :WMToggle <CR>
 
 " tagbar config
-let g:Tlist_WinWidth = 50
+let g:Tlist_WinWidth = 40
+let g:tagbar_width = 30
+autocmd VimEnter * nested :call tagbar#autoopen()
+autocmd FileType * nested :call tagbar#autoopen()
 noremap <F3> :TagbarToggle <CR>
 set tags=./tags;/
 "set tags+=/usr/local/share/ctags/qt4
@@ -83,7 +86,9 @@ noremap <leader>gr :Gremove <CR>
 noremap <leader>gs :Gstatus <CR>
 "external cmds
 noremap <leader>mc :!chmod +x %<CR>
+noremap <leader>mj :!javac % <CR>
 noremap <leader>mm :!make <CR>
+noremap <leader>mp :!python % <CR>
 noremap <leader>mt :!pdflatex % <CR>
 noremap <leader>mx :!./%<CR>
 "option toggles
@@ -117,7 +122,7 @@ noremap <leader>td :tabnew % <CR>
 noremap <leader>tm :tabmove 
 noremap <leader>tn :tabnew <CR>
 noremap <leader>tq :tabclose <CR>
-noremap <leader>wc <C-W>c
+noremap <leader>ww <C-W>c
 
 
 " command-line remappings
