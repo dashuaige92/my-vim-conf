@@ -10,7 +10,6 @@ filetype plugin indent on
 "colorscheme solarized
 
 " PLUGIN CONFIGS AND MAPPINGS
-set runtimepath-=~/.vim/bundle/autoclose
 set runtimepath-=~/.vim/bundle/minibufexpl
 "set runtimepath-=~/.vim/bundle/tagbar
 
@@ -51,17 +50,18 @@ noremap <A-]> :vsp <CR> :exec("tag ".expand("<cword>")) <CR>
 
 
 " KEYMAPPINGS
-inoremap	kj	<Esc>
-inoremap	kkj	<Esc>:w <CR>
+inoremap	lh	<Esc>
+inoremap	kj	<Esc>:w <CR>
+noremap     K   i<CR><Esc>
+"noremap     K   a <CR><Esc>k$
+noremap     <C-J>   5j
+noremap     <C-K>   5k
 "inoremap	<Left>	<NOP>
 "inoremap	<Down>	<NOP>
 "inoremap	<Up>	<Esc>:w <CR>
 "inoremap	<Right>	<NOP>
-
-"noremap <F5> :ConqueTermTab python manage.py runserver 0.0.0.0:8000 <CR>
 noremap <F7> :set filetype=html <CR>
 noremap <F9> :so ~/.vimrc <CR> :e <CR>
-noremap <C-J> a <CR><Esc>k$
 
 " <leader> additions
 "buffer
@@ -75,9 +75,10 @@ noremap <leader>ga :Gwrite <CR>
 noremap <leader>gb :Gblame <CR>
 noremap <leader>gc :Gcommit <CR>
 noremap <leader>gd :Gdiff <CR>
-noremap <leader>gd :Gdiff <CR>
-noremap <leader>gj :Git push <CR>
-noremap <leader>gk :Git pull <CR>
+noremap <leader>ghj :Git push heroku master<CR>
+noremap <leader>ghk :Git pull heroku master<CR>
+noremap <leader>gj :Git push origin master<CR>
+noremap <leader>gk :Git pull origin master<CR>
 noremap <leader>gm :Gmove 
 noremap <leader>go :Gread <CR>
 noremap <leader>go :only <CR> :NERDTree <CR>
@@ -89,7 +90,7 @@ noremap <leader>mc :!chmod +x %<CR>
 noremap <leader>mj :!javac % <CR>
 noremap <leader>mm :!make <CR>
 noremap <leader>mp :!python % <CR>
-noremap <leader>mt :!pdflatex % <CR>
+noremap <leader>mt :!pdflatex "%" <CR>
 noremap <leader>mx :!./%<CR>
 "option toggles
 noremap <leader>oc :set @/ = "" <CR>
@@ -135,13 +136,12 @@ cno $$ e ./
 au BufRead,BufNewFile *.php set ft=php.html
 au BufRead,BufNewFile *.js set ft=javascript.html
 au BufRead,BufNewFile *.html set ft=html.javascript
-autocmd FileType html :setlocal shiftwidth=2 tabstop=2
+au BufRead,BufNewFile *.html setlocal shiftwidth=2 tabstop=2
+"autocmd FileType html :setlocal shiftwidth=2 tabstop=2
 autocmd FileType tex :setlocal shiftwidth=2 tabstop=2 noexpandtab
 autocmd FileType python :inoremap # X#
+autocmd FileType tex :setlocal runtimepath-=~/.vim/bundle/vim-autocomplpop
 "autocmd Syntax c,cpp,vim,xml,html,xhtml setlocal foldmethod=indent
-"autocmd Syntax c,cpp,vim,xml,html,xhtml,perl normal zR
-"au BufWinLeave * mkview
-"au BufWinEnter * silent loadview
 
 
 " CONFIGS

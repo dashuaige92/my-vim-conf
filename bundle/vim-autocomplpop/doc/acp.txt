@@ -152,7 +152,7 @@ OPTIONS                                                          *acp-options*
         Value set to 'complete' temporarily when auto-popup.
 
                                                  *g:acp_completeoptPreview*  >
-  let g:acp_completeoptPreview = 0
+  let g:acp_completeoptPreview = 1
 <
         If non-zero, "preview" is added to 'completeopt' when auto-popup.
 
@@ -169,13 +169,13 @@ OPTIONS                                                          *acp-options*
         completion will be never attempted.
 
                                              *g:acp_behaviorSnipmateLength*  >
-  let g:acp_behaviorSnipmateLength = -1
+  let g:acp_behaviorSnipmateLength = 1
 <
         Pattern before the cursor, which are needed to attempt
         snipMate-trigger completion.
 
                                              *g:acp_behaviorKeywordCommand*  >
-  let g:acp_behaviorKeywordCommand = "\<C-n>"
+  let g:acp_behaviorKeywordCommand = "\<C-h>"
 <
         Command for keyword completion. This option is usually set "\<C-n>" or
         "\<C-p>".
