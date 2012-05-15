@@ -136,11 +136,17 @@ cno $$ e ./
 au BufRead,BufNewFile *.php set ft=php.html
 au BufRead,BufNewFile *.js set ft=javascript.html
 au BufRead,BufNewFile *.html set ft=html.javascript
+"au BufRead,BufNewFile Gemfile set ft=ruby
+au BufRead,BufNewFile Guardfile set ft=ruby
+
+au BufRead,BufNewFile *.css setlocal shiftwidth=2 tabstop=2
+au BufRead,BufNewFile *.scss setlocal shiftwidth=2 tabstop=2
 au BufRead,BufNewFile *.html setlocal shiftwidth=2 tabstop=2
+au BufRead,BufNewFile *.erb setlocal shiftwidth=2 tabstop=2
 "autocmd FileType html :setlocal shiftwidth=2 tabstop=2
-autocmd FileType tex :setlocal shiftwidth=2 tabstop=2 noexpandtab
-autocmd FileType python :inoremap # X#
-autocmd FileType tex :setlocal runtimepath-=~/.vim/bundle/vim-autocomplpop
+au FileType ruby :setlocal shiftwidth=2 tabstop=2
+au FileType tex :setlocal shiftwidth=2 tabstop=2 noexpandtab
+au FileType python :inoremap # X#
 "autocmd Syntax c,cpp,vim,xml,html,xhtml setlocal foldmethod=indent
 
 
