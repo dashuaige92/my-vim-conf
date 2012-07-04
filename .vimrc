@@ -1,21 +1,32 @@
+" On OSX
+vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
+nmap <C-b> :call setreg("\"",system("pbpaste"))<CR>p
+
 call pathogen#infect()
 syntax on
 filetype plugin indent on
 " vim-colors-solarized setup
 "if has('gui_running')
-    set background=dark
+set background=dark
 "else
-    "set background=""
+"set background=""
 "endif
 "colorscheme solarized
 
 " PLUGIN CONFIGS AND MAPPINGS
 set runtimepath-=~/.vim/bundle/minibufexpl
-"set runtimepath-=~/.vim/bundle/tagbar
+set runtimepath-=~/.vim/bundle/vim-autocomplpop
+set runtimepath-=~/.vim/bundle/supertab
+
+" vim-autocomplpop config
+let g:acp_ignorecaseOption = 0
+
+" zencoding config
+let g:user_zen_leader_key = '<C-z>'
 
 " multiselect config
-"noremap <C-C> :MSClear <CR>
-"noremap <C-O> :MSExecNormalCmd 
+"noremap <C-c> :MSClear <CR>
+"noremap <C-o> :MSExecNormalCmd 
 
 " NERDTree config
 let g:NERDTreeIgnore = ['\.pyc$', '\.aux']
@@ -35,7 +46,7 @@ let g:miniBufExplUseSingleClick = 1
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplVSplit = 25
 let g:miniBufExplSplitBelow=1
-noremap <c-w><c-t> :WMToggle <CR>
+noremap <C-w><C-t> :WMToggle <CR>
 
 " tagbar config
 let g:Tlist_WinWidth = 40
@@ -50,23 +61,23 @@ noremap <A-]> :vsp <CR> :exec("tag ".expand("<cword>")) <CR>
 
 
 " KEYMAPPINGS
+noremap     `   gt
+noremap     ~   gT
 inoremap	lh	<Esc>
 inoremap	kj	<Esc>:w <CR>
 noremap     K   i<CR><Esc>
 "noremap     K   a <CR><Esc>k$
-noremap     <C-J>   5j
-noremap     <C-K>   5k
-"inoremap	<Left>	<NOP>
-"inoremap	<Down>	<NOP>
-"inoremap	<Up>	<Esc>:w <CR>
-"inoremap	<Right>	<NOP>
+noremap     <C-j>   5j
+noremap     <C-k>   5k
+noremap     <C-h>   :5winc < <CR>
+noremap     <C-l>   :5winc > <CR>
 noremap <F7> :set filetype=html <CR>
 noremap <F9> :so ~/.vimrc <CR> :e <CR>
 
 " <leader> additions
 "buffer
 noremap <leader>bc :Bclose! <CR>
-noremap <leader>bf <C-W><C-L><C-W><C-C>gt <CR>
+noremap <leader>bf <C-w><C-l><C-w><C-c>gt <CR>
 noremap <leader>bq :Bclose <CR>
 "vim-fugitive
 noremap <leader>g2 :diffget //2 <CR> diffupdate <CR>
@@ -103,14 +114,15 @@ noremap <leader>qq :qa <CR>
 noremap <leader>qr :!rm % <CR> :tabclose <CR>
 noremap <leader>qs :mksession! <CR>
 noremap <leader>qt :q <CR>
-noremap <leader>qw <C-W><C-C> <CR>
-"sorts
+noremap <leader>qw <C-w><C-c> <CR>
+"sorts and restructuring
 "noremap <leader>rs :s/\(snippet.*\)\n/\1@@@/<CR> 
 "noremap <leader>rs :s/\n\(^[^snippet].*\)/@@@\1/<CR> :'<,'>sort<CR> :'<,'>s/@@@/\r/g<CR>
 noremap <leader>rd :s/$\n/@@@<CR> :s/@@@def/\r/g<CR> :'<,'>sort<CR> :%s/@@@/\r/g<CR>
 noremap <leader>rf :s/$\n/@@@<CR> :s/@@@function/\r/g<CR> :'<,'>sort<CR> :%s/@@@/\r/g<CR>
 noremap <leader>rs :s/$\n/@@@<CR> :s/@@@snippet/\rsnippet/g<CR> :'<,'>sort<CR> :%s/@@@/\r/g<CR>
 noremap <leader>rv :g/fun\%[ction]!\= /,/endf\%[unction]/ s/$\n/@@@<CR> :'<,'>sort /fun=%[ction]!\=/<CR> :%s/@@@/\r/g<CR>
+noremap <leader>rh :%s/:\(\w\+\)\s*=>\s*\("[^"]*"\\|'[^']*'\\|{[^}]*}\\|:\?\w\+\)/\1: \2/g<CR>
 "saving
 noremap <leader>sc :w <CR> :tabclose <CR>
 noremap <leader>ss :wa <CR>
@@ -124,6 +136,16 @@ noremap <leader>tm :tabmove
 noremap <leader>tn :tabnew <CR>
 noremap <leader>tq :tabclose <CR>
 noremap <leader>ww <C-W>c
+"tabular.vim
+vnoremap <leader>=~ :Tab custom_tabs<CR> =
+vnoremap <leader>== :Tab equals_align<CR> =
+vnoremap <leader>=h :Tab hash_colon_align<CR> =
+vnoremap <leader>=c :Tab comma_align<CR> =
+vnoremap <leader>=C :Tab comma_align_all<CR> =
+vnoremap <leader>=n :Tab colon_align<CR> =
+vnoremap <leader>=d :Tab dotted_method_chain<CR> =
+"plugin shortcuts
+noremap <leader>pc :CoffeeCompile watch vert<CR>
 
 
 " command-line remappings
@@ -133,18 +155,22 @@ cno $$ e ./
 
 
 " AUTOCMDS
+au BufRead,BufNewFile .bash* set ft=sh
 au BufRead,BufNewFile *.php set ft=php.html
 au BufRead,BufNewFile *.js set ft=javascript.html
 au BufRead,BufNewFile *.html set ft=html.javascript
-"au BufRead,BufNewFile Gemfile set ft=ruby
+au BufRead,BufNewFile *.ejs set ft=jst.html
+
+au BufRead,BufNewFile *.rabl set ft=ruby
+au BufRead,BufNewFile Gemfile* set ft=ruby
 au BufRead,BufNewFile Guardfile set ft=ruby
 
-au BufRead,BufNewFile *.css setlocal shiftwidth=2 tabstop=2
-au BufRead,BufNewFile *.scss setlocal shiftwidth=2 tabstop=2
 au BufRead,BufNewFile *.html setlocal shiftwidth=2 tabstop=2
 au BufRead,BufNewFile *.erb setlocal shiftwidth=2 tabstop=2
 "autocmd FileType html :setlocal shiftwidth=2 tabstop=2
 au FileType ruby :setlocal shiftwidth=2 tabstop=2
+au FileType html :setlocal shiftwidth=2 tabstop=2
+au FileType jst :setlocal shiftwidth=2 tabstop=2
 au FileType tex :setlocal shiftwidth=2 tabstop=2 noexpandtab
 au FileType python :inoremap # X#
 "autocmd Syntax c,cpp,vim,xml,html,xhtml setlocal foldmethod=indent
@@ -152,7 +178,9 @@ au FileType python :inoremap # X#
 
 " CONFIGS
 set number
-set autoindent autoread autowrite
+set autoindent
+set autoread 
+set autowrite
 set formatoptions+=r
 set foldmethod=indent
 set foldlevel=99
@@ -174,3 +202,34 @@ set ssop-="folds "
 
 "set nobackup
 set directory=~/.vim/swap
+
+
+if exists("+showtabline")
+     function! MyTabLine()
+         let s = ''
+         let t = tabpagenr()
+         let i = 1
+         while i <= tabpagenr('$')
+             let buflist = tabpagebuflist(i)
+             let winnr = tabpagewinnr(i)
+             let s .= '%' . i . 'T'
+             let s .= (i == t ? '%1*' : '%2*')
+             let s .= ' '
+             let s .= i . ')'
+             let s .= ' %*'
+             let s .= (i == t ? '%#TabLineSel#' : '%#TabLine#')
+             let file = bufname(buflist[winnr - 1])
+             let file = fnamemodify(file, ':p:t')
+             if file == ''
+                 let file = '[No Name]'
+             endif
+             let s .= file
+             let i = i + 1
+         endwhile
+         let s .= '%T%#TabLineFill#%='
+         let s .= (tabpagenr('$') > 1 ? '%999XX' : 'X')
+         return s
+     endfunction
+     set stal=2
+     set tabline=%!MyTabLine()
+endif
