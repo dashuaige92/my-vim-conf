@@ -1,6 +1,6 @@
 " On OSX
 vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
-nmap <C-b> :call setreg("\"",system("pbpaste"))<CR>p
+nmap <C-v> :call setreg("\"",system("pbpaste"))<CR>p
 
 call pathogen#infect()
 syntax on
@@ -15,11 +15,12 @@ set background=dark
 
 " PLUGIN CONFIGS AND MAPPINGS
 set runtimepath-=~/.vim/bundle/minibufexpl
-set runtimepath-=~/.vim/bundle/vim-autocomplpop
+"set runtimepath-=~/.vim/bundle/vim-autocomplpop
 set runtimepath-=~/.vim/bundle/supertab
 
 " vim-autocomplpop config
 let g:acp_ignorecaseOption = 0
+let g:acp_behaviorKeywordIgnores = ['if', 'do', 'end', 'nil']
 
 " zencoding config
 let g:user_zen_leader_key = '<C-z>'
@@ -61,8 +62,10 @@ noremap <A-]> :vsp <CR> :exec("tag ".expand("<cword>")) <CR>
 
 
 " KEYMAPPINGS
-noremap     `   gt
-noremap     ~   gT
+" noremap slots: RU|X
+" noremap backup slots: IF HLM
+noremap     )   gt
+noremap     (   gT
 inoremap	lh	<Esc>
 inoremap	kj	<Esc>:w <CR>
 noremap     K   i<CR><Esc>
@@ -73,8 +76,15 @@ noremap     <C-h>   :5winc < <CR>
 noremap     <C-l>   :5winc > <CR>
 noremap <F7> :set filetype=html <CR>
 noremap <F9> :so ~/.vimrc <CR> :e <CR>
+imap    <C-\> <CR><Esc>O
 
 " <leader> additions
+"file formatting
+noremap <leader>ah :%s/:\(\w\+\)\s*=>\s*\("[^"]*"\\|'[^']*'\\|{[^}]*}\\|\[[^\]]*\]\\|:\?\w\+\)/\1: \2/g<CR>
+vnoremap <leader>ar c<Esc>msjmtP'tk :'s+1,.g/^/m 's<CR>kdd
+noremap <leader>as :%s/\s\+$<CR>
+noremap <leader>aw :%s/\s\+$//<CR>
+noremap <leader>a' :%s/"/'/gc<CR>
 "buffer
 noremap <leader>bc :Bclose! <CR>
 noremap <leader>bf <C-w><C-l><C-w><C-c>gt <CR>
@@ -122,7 +132,6 @@ noremap <leader>rd :s/$\n/@@@<CR> :s/@@@def/\r/g<CR> :'<,'>sort<CR> :%s/@@@/\r/g
 noremap <leader>rf :s/$\n/@@@<CR> :s/@@@function/\r/g<CR> :'<,'>sort<CR> :%s/@@@/\r/g<CR>
 noremap <leader>rs :s/$\n/@@@<CR> :s/@@@snippet/\rsnippet/g<CR> :'<,'>sort<CR> :%s/@@@/\r/g<CR>
 noremap <leader>rv :g/fun\%[ction]!\= /,/endf\%[unction]/ s/$\n/@@@<CR> :'<,'>sort /fun=%[ction]!\=/<CR> :%s/@@@/\r/g<CR>
-noremap <leader>rh :%s/:\(\w\+\)\s*=>\s*\("[^"]*"\\|'[^']*'\\|{[^}]*}\\|:\?\w\+\)/\1: \2/g<CR>
 "saving
 noremap <leader>sc :w <CR> :tabclose <CR>
 noremap <leader>ss :wa <CR>
@@ -137,16 +146,16 @@ noremap <leader>tn :tabnew <CR>
 noremap <leader>tq :tabclose <CR>
 noremap <leader>ww <C-W>c
 "tabular.vim
-vnoremap <leader>=~ :Tab custom_tabs<CR> =
-vnoremap <leader>== :Tab equals_align<CR> =
-vnoremap <leader>=h :Tab hash_colon_align<CR> =
-vnoremap <leader>=c :Tab comma_align<CR> =
-vnoremap <leader>=C :Tab comma_align_all<CR> =
-vnoremap <leader>=n :Tab colon_align<CR> =
-vnoremap <leader>=d :Tab dotted_method_chain<CR> =
+vnoremap <leader>=~ :Tab custom_tabs<CR>
+vnoremap <leader>== :Tab equals_align<CR>
+vnoremap <leader>=h :Tab hash_colon_align<CR>
+vnoremap <leader>=c :Tab comma_align<CR>
+vnoremap <leader>=C :Tab comma_align_all<CR>
+vnoremap <leader>=n :Tab colon_align<CR>
+vnoremap <leader>=d :Tab dotted_method_chain<CR>
+vnoremap <leader>=f :Tab first_line_equals<CR>
 "plugin shortcuts
 noremap <leader>pc :CoffeeCompile watch vert<CR>
-
 
 " command-line remappings
 cno $h e ~/
@@ -159,7 +168,8 @@ au BufRead,BufNewFile .bash* set ft=sh
 au BufRead,BufNewFile *.php set ft=php.html
 au BufRead,BufNewFile *.js set ft=javascript.html
 au BufRead,BufNewFile *.html set ft=html.javascript
-au BufRead,BufNewFile *.ejs set ft=jst.html
+au BufRead,BufNewFile *.erb set ft=eruby.html.javascript
+au BufRead,BufNewFile *.ejs* set ft=jst.html
 
 au BufRead,BufNewFile *.rabl set ft=ruby
 au BufRead,BufNewFile Gemfile* set ft=ruby
@@ -168,6 +178,7 @@ au BufRead,BufNewFile Guardfile set ft=ruby
 au BufRead,BufNewFile *.html setlocal shiftwidth=2 tabstop=2
 au BufRead,BufNewFile *.erb setlocal shiftwidth=2 tabstop=2
 "autocmd FileType html :setlocal shiftwidth=2 tabstop=2
+au FileType c :setlocal shiftwidth=8 tabstop=8
 au FileType ruby :setlocal shiftwidth=2 tabstop=2
 au FileType html :setlocal shiftwidth=2 tabstop=2
 au FileType jst :setlocal shiftwidth=2 tabstop=2
@@ -177,6 +188,7 @@ au FileType python :inoremap # X#
 
 
 " CONFIGS
+set colorcolumn=80
 set number
 set autoindent
 set autoread 
@@ -195,6 +207,8 @@ set smartcase
 set incsearch
 "set hlsearch
 set wildmenu
+set wildmode=list:longest
+set tagstack
 
 " session config
 set ssop-="options "
