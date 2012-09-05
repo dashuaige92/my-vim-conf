@@ -70,3 +70,9 @@
 [submodule "bundle/vim-simplefold"]
 	path = bundle/vim-simplefold
 	url = https://github.com/pangloss/vim-simplefold.git
+[submodule "bundle/grep.vim"]
+	path = bundle/grep.vim
+	url = https://github.com/vim-scripts/grep.vim.git
+[submodule "bundle/vim-less"]
+	path = bundle/vim-less
+	url = git://github.com/groenewege/vim-less.git

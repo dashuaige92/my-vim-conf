@@ -1,5 +1,5 @@
 #!/bin/bash
-TMPDIR=$(mktemp -d) || exit 1
+TMPDIR=$(mktemp -d tmp) || exit 1
 RECTXT="$TMPDIR/vim.recovery.$USER.txt"
 RECFN="$TMPDIR/vim.recovery.$USER.fn"
 trap 'rm -f "$RECTXT" "$RECFN"; rmdir "$TMPDIR"' 0 1 2 3 15
