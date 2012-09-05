@@ -63,7 +63,7 @@
 	url = https://github.com/kchmck/vim-coffee-script.git
 [submodule "bundle/tabular"]
 	path = bundle/tabular
-	url = https://github.com/godlygeek/tabular.git
+	url = git@github.com:dashuaige92/tabular.git
 [submodule "bundle/vim-jst"]
 	path = bundle/vim-jst
 	url = https://github.com/briancollins/vim-jst.git
