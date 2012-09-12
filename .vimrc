@@ -83,7 +83,6 @@ imap    <C-\> <CR><Esc>O
 noremap <leader>ah :%s/:\(\w\+\)\s*=>\s*\("[^"]*"\\|'[^']*'\\|{[^}]*}\\|\[[^\]]*\]\\|:\?\w\+\)/\1: \2/g<CR>
 vnoremap <leader>ar c<Esc>msjmtP'tk :'s+1,.g/^/m 's<CR>kdd
 noremap <leader>as :%s/\s\+$<CR>
-noremap <leader>aw :%s/\s\+$//<CR>
 noremap <leader>a' :%s/"/'/gc<CR>
 "buffer
 noremap <leader>bc :Bclose! <CR>
