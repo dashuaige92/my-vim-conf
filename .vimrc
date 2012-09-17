@@ -146,6 +146,7 @@ noremap <leader>tq :tabclose <CR>
 noremap <leader>ww <C-W>c
 "tabular.vim
 vnoremap <leader>=~ :Tab custom_tabs<CR>
+vnoremap <leader>=a :Tab ampersand_align<CR>
 vnoremap <leader>== :Tab equals_align<CR>
 vnoremap <leader>=h :Tab hash_colon_align<CR>
 vnoremap <leader>=c :Tab comma_align<CR>
@@ -177,7 +178,10 @@ au BufRead,BufNewFile Guardfile set ft=ruby
 au BufRead,BufNewFile *.html setlocal shiftwidth=2 tabstop=2
 au BufRead,BufNewFile *.erb setlocal shiftwidth=2 tabstop=2
 "autocmd FileType html :setlocal shiftwidth=2 tabstop=2
-au FileType c :setlocal shiftwidth=8 tabstop=8
+au BufRead,BufNewFile *.h setlocal shiftwidth=8 tabstop=8 noexpandtab
+
+au FileType c :setlocal shiftwidth=8 tabstop=8 noexpandtab
+au FileType cpp :setlocal shiftwidth=2 tabstop=2
 au FileType ruby :setlocal shiftwidth=2 tabstop=2
 au FileType html :setlocal shiftwidth=2 tabstop=2
 au FileType jst :setlocal shiftwidth=2 tabstop=2
