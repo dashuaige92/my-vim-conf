@@ -181,7 +181,7 @@ au BufRead,BufNewFile *.erb setlocal shiftwidth=2 tabstop=2
 au BufRead,BufNewFile *.h setlocal shiftwidth=8 tabstop=8 noexpandtab
 
 au FileType c :setlocal shiftwidth=8 tabstop=8 noexpandtab
-au FileType cpp :setlocal shiftwidth=2 tabstop=2
+au FileType cpp :setlocal shiftwidth=4 tabstop=4
 au FileType ruby :setlocal shiftwidth=2 tabstop=2
 au FileType html :setlocal shiftwidth=2 tabstop=2
 au FileType jst :setlocal shiftwidth=2 tabstop=2
