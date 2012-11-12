@@ -66,6 +66,7 @@ noremap <A-]> :vsp <CR> :exec("tag ".expand("<cword>")) <CR>
 " noremap backup slots: IF HLM
 noremap     )   gt
 noremap     (   gT
+noremap     <space> zz
 inoremap	lh	<Esc>
 inoremap	kj	<Esc>:w <CR>
 noremap     K   i<CR><Esc>
@@ -82,7 +83,7 @@ imap    <C-\> <CR><Esc>O
 "file formatting
 noremap <leader>ah :%s/:\(\w\+\)\s*=>\s*\("[^"]*"\\|'[^']*'\\|{[^}]*}\\|\[[^\]]*\]\\|:\?\w\+\)/\1: \2/g<CR>
 vnoremap <leader>ar c<Esc>msjmtP'tk :'s+1,.g/^/m 's<CR>kdd
-noremap <leader>as :%s/\s\+$<CR>
+noremap <leader>as :%s/\s*\r\?$<CR>
 noremap <leader>a' :%s/"/'/gc<CR>
 "buffer
 noremap <leader>bc :Bclose! <CR>
@@ -137,6 +138,9 @@ noremap <leader>ss :wa <CR>
 noremap <leader>st :w <CR>
 noremap <leader>sq :wqa <CR>
 "tabs
+let g:lasttab = 1
+nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
 noremap <leader>tb :tab ball <CR>
 noremap <leader>tc :tabclose! <CR>
 noremap <leader>td :tabnew % <CR>
@@ -146,6 +150,7 @@ noremap <leader>tq :tabclose <CR>
 noremap <leader>ww <C-W>c
 "tabular.vim
 vnoremap <leader>=~ :Tab custom_tabs<CR>
+vnoremap <leader>=3 :Tab /#<CR>
 vnoremap <leader>=a :Tab ampersand_align<CR>
 vnoremap <leader>== :Tab equals_align<CR>
 vnoremap <leader>=h :Tab hash_colon_align<CR>
@@ -167,6 +172,7 @@ cno $$ e ./
 au BufRead,BufNewFile .bash* set ft=sh
 au BufRead,BufNewFile *.php set ft=php.html
 au BufRead,BufNewFile *.js set ft=javascript.html
+au BufRead,BufNewFile *.json set ft=javascript
 au BufRead,BufNewFile *.html set ft=html.javascript
 au BufRead,BufNewFile *.erb set ft=eruby.html.javascript
 au BufRead,BufNewFile *.ejs* set ft=jst.html
@@ -175,19 +181,22 @@ au BufRead,BufNewFile *.rabl set ft=ruby
 au BufRead,BufNewFile Gemfile* set ft=ruby
 au BufRead,BufNewFile Guardfile set ft=ruby
 
+au BufRead,BufNewFile *.json setlocal shiftwidth=2 tabstop=2
 au BufRead,BufNewFile *.html setlocal shiftwidth=2 tabstop=2
 au BufRead,BufNewFile *.erb setlocal shiftwidth=2 tabstop=2
 "autocmd FileType html :setlocal shiftwidth=2 tabstop=2
 au BufRead,BufNewFile *.h setlocal shiftwidth=8 tabstop=8 noexpandtab
 
+"au FileType python :setlocal shiftwidth=2 tabstop=2
 au FileType c :setlocal shiftwidth=8 tabstop=8 noexpandtab
 au FileType cpp :setlocal shiftwidth=4 tabstop=4
 au FileType ruby :setlocal shiftwidth=2 tabstop=2
 au FileType html :setlocal shiftwidth=2 tabstop=2
 au FileType jst :setlocal shiftwidth=2 tabstop=2
 au FileType tex :setlocal shiftwidth=2 tabstop=2 noexpandtab
-au FileType python :inoremap # X#
 "autocmd Syntax c,cpp,vim,xml,html,xhtml setlocal foldmethod=indent
+
+au! FileType python setl nosmartindent
 
 
 " CONFIGS
