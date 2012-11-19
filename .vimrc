@@ -64,12 +64,15 @@ noremap <A-]> :vsp <CR> :exec("tag ".expand("<cword>")) <CR>
 " KEYMAPPINGS
 " noremap slots: RU|X
 " noremap backup slots: IF HLM
-noremap     )   gt
-noremap     (   gT
-noremap     <space> zz
-inoremap	lh	<Esc>
-inoremap	kj	<Esc>:w <CR>
-noremap     K   i<CR><Esc>
+noremap  )       gt
+noremap  (       gT
+noremap  <space> zz
+noremap  <CR> gg
+imap     <C-\>   <Esc>o
+inoremap <C-'>   <CR>
+inoremap lh      <Esc>
+inoremap kj      <Esc>:w<CR>
+noremap  K       i<CR><Esc>
 "noremap     K   a <CR><Esc>k$
 noremap     <C-j>   5j
 noremap     <C-k>   5k
@@ -77,7 +80,6 @@ noremap     <C-h>   :5winc < <CR>
 noremap     <C-l>   :5winc > <CR>
 noremap <F7> :set filetype=html <CR>
 noremap <F9> :so ~/.vimrc <CR> :e <CR>
-imap    <C-\> <CR><Esc>O
 
 " <leader> additions
 "file formatting
@@ -137,7 +139,7 @@ noremap <leader>sc :w <CR> :tabclose <CR>
 noremap <leader>ss :wa <CR>
 noremap <leader>st :w <CR>
 noremap <leader>sq :wqa <CR>
-"tabs
+"tabs and tab spacing
 let g:lasttab = 1
 nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
@@ -147,10 +149,14 @@ noremap <leader>td :tabnew % <CR>
 noremap <leader>tm :tabmove 
 noremap <leader>tn :tabnew <CR>
 noremap <leader>tq :tabclose <CR>
-noremap <leader>ww <C-W>c
+noremap <leader>tt :setlocal shiftwidth <CR>
+noremap <leader>t2 :setlocal shiftwidth=2 tabstop=2 <CR>
+noremap <leader>t4 :setlocal shiftwidth=4 tabstop=4 <CR>
+noremap <leader>t8 :setlocal shiftwidth=8 tabstop=8 <CR>
 "tabular.vim
 vnoremap <leader>=~ :Tab custom_tabs<CR>
 vnoremap <leader>=3 :Tab /#<CR>
+vnoremap <leader>=- :Tab space_align<CR>
 vnoremap <leader>=a :Tab ampersand_align<CR>
 vnoremap <leader>== :Tab equals_align<CR>
 vnoremap <leader>=h :Tab hash_colon_align<CR>
@@ -218,8 +224,9 @@ set tabstop=4 shiftwidth=4 expandtab
 set smartcase
 set incsearch
 "set hlsearch
+set completeopt+=longest
 set wildmenu
-set wildmode=list:longest
+set wildmode=list:longest,full
 set tagstack
 
 " session config
