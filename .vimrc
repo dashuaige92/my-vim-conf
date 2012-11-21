@@ -17,6 +17,7 @@ set background=dark
 set runtimepath-=~/.vim/bundle/minibufexpl
 "set runtimepath-=~/.vim/bundle/vim-autocomplpop
 set runtimepath-=~/.vim/bundle/supertab
+"set runtimepath-=~/.vim/bundle/vim-persist
 
 " vim-autocomplpop config
 let g:acp_ignorecaseOption = 0
@@ -33,7 +34,6 @@ let g:user_zen_leader_key = '<C-z>'
 let g:NERDTreeIgnore = ['\.pyc$', '\.aux']
 let g:nerdtree_tabs_open_on_console_startup = 1
 let g:NERDTreeShowLineNumbers = 1
-noremap <F4> :NERDTreeToggle <CR>
 
 " vim-fugitive config
 autocmd BufReadPost fugitive://* set bufhidden=delete
@@ -52,18 +52,29 @@ noremap <C-w><C-t> :WMToggle <CR>
 " tagbar config
 let g:Tlist_WinWidth = 40
 let g:tagbar_width = 30
-autocmd VimEnter * nested :call tagbar#autoopen()
-autocmd FileType * nested :call tagbar#autoopen()
-noremap <F3> :TagbarToggle <CR>
 set tags=./tags;/
 "set tags+=/usr/local/share/ctags/qt4
 noremap <C-\> :tab split <CR> :exec("tag ".expand("<cword>")) <CR>
 noremap <A-]> :vsp <CR> :exec("tag ".expand("<cword>")) <CR>
+autocmd BufRead * :TagbarOpen
+
+" persist config
+let g:persist_width = 30
+autocmd BufRead * if exists(':PersistOpen') | :PersistOpen
+
+" indent/html.vim config
+let g:html_indent_inctags = "html,body,head,tbody,template"
 
 
 " KEYMAPPINGS
 " noremap slots: RU|X
 " noremap backup slots: IF HLM
+
+noremap <F3> :TagbarClose <CR> :PersistClose <CR>
+noremap <F4> :TagbarOpen <CR> :PersistOpen <CR>
+noremap <F5> :NERDTreeToggle <CR>
+noremap <F7> :set filetype=html <CR>
+
 noremap  )       gt
 noremap  (       gT
 noremap  <space> zz
@@ -78,14 +89,13 @@ noremap     <C-j>   5j
 noremap     <C-k>   5k
 noremap     <C-h>   :5winc < <CR>
 noremap     <C-l>   :5winc > <CR>
-noremap <F7> :set filetype=html <CR>
-noremap <F9> :so ~/.vimrc <CR> :e <CR>
 
 " <leader> additions
 "file formatting
 noremap <leader>ah :%s/:\(\w\+\)\s*=>\s*\("[^"]*"\\|'[^']*'\\|{[^}]*}\\|\[[^\]]*\]\\|:\?\w\+\)/\1: \2/g<CR>
 vnoremap <leader>ar c<Esc>msjmtP'tk :'s+1,.g/^/m 's<CR>kdd
-noremap <leader>as :%s/\s*\r\?$<CR>
+noremap <leader>as :%s/\s\+\r\?$<CR>
+noremap <leader>af :%s/ﬁ/fi/g<CR>
 noremap <leader>a' :%s/"/'/gc<CR>
 "buffer
 noremap <leader>bc :Bclose! <CR>
@@ -187,6 +197,7 @@ au BufRead,BufNewFile *.rabl set ft=ruby
 au BufRead,BufNewFile Gemfile* set ft=ruby
 au BufRead,BufNewFile Guardfile set ft=ruby
 
+au BufRead,BufNewFile *.coffee setlocal shiftwidth=2 tabstop=2
 au BufRead,BufNewFile *.json setlocal shiftwidth=2 tabstop=2
 au BufRead,BufNewFile *.html setlocal shiftwidth=2 tabstop=2
 au BufRead,BufNewFile *.erb setlocal shiftwidth=2 tabstop=2
@@ -265,4 +276,20 @@ if exists("+showtabline")
      endfunction
      set stal=2
      set tabline=%!MyTabLine()
+endif
+
+if executable('coffeetags')
+  let g:tagbar_type_coffee = {
+        \ 'ctagsbin' : 'coffeetags',
+        \ 'ctagsargs' : '',
+        \ 'kinds' : [
+        \ 'f:functions',
+        \ 'o:object',
+        \ ],
+        \ 'sro' : ".",
+        \ 'kind2scope' : {
+        \ 'f' : 'object',
+        \ 'o' : 'object',
+        \ }
+        \ }
 endif
