@@ -59,6 +59,7 @@ noremap <A-]> :vsp <CR> :exec("tag ".expand("<cword>")) <CR>
 autocmd BufRead * :TagbarOpen
 
 " persist config
+set updatetime=1000
 let g:persist_width = 30
 autocmd BufRead * if exists(':PersistOpen') | :PersistOpen
 
