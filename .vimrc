@@ -66,11 +66,15 @@ autocmd BufRead * if exists(':PersistOpen') | :PersistOpen
 " indent/html.vim config
 let g:html_indent_inctags = "html,body,head,tbody,template"
 
+" vim-indent-plugin
+let g:indent_guides_enable_on_vim_startup = 1
+
 
 " KEYMAPPINGS
 " noremap slots: RU|X
 " noremap backup slots: IF HLM
 
+noremap <F3> :GundoToggle <CR>
 noremap <F3> :TagbarClose <CR> :PersistClose <CR>
 noremap <F4> :TagbarOpen <CR> :PersistOpen <CR>
 noremap <F5> :NERDTreeToggle <CR>
