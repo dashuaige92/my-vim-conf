@@ -3,6 +3,8 @@ vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
 nmap <C-v> :call setreg("\"",system("pbpaste"))<CR>p
 
 call pathogen#infect()
+"call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
 syntax on
 filetype plugin indent on
 " vim-colors-solarized setup
@@ -34,6 +36,7 @@ let g:user_zen_leader_key = '<C-z>'
 let g:NERDTreeIgnore = ['\.pyc$', '\.aux']
 let g:nerdtree_tabs_open_on_console_startup = 1
 let g:NERDTreeShowLineNumbers = 1
+command! -nargs=1 E wincmd h | execute 'normal ' . <args> . 'G<enter>'
 
 " vim-fugitive config
 autocmd BufReadPost fugitive://* set bufhidden=delete
@@ -74,12 +77,15 @@ let g:indent_guides_enable_on_vim_startup = 1
 " noremap slots: RU|X
 " noremap backup slots: IF HLM
 
-noremap <F3> :GundoToggle <CR>
 noremap <F3> :TagbarClose <CR> :PersistClose <CR>
 noremap <F4> :TagbarOpen <CR> :PersistOpen <CR>
 noremap <F5> :NERDTreeToggle <CR>
 noremap <F7> :set filetype=html <CR>
 
+"noremap  -       _
+"noremap  _       :bp<CR>
+"noremap  +       :bn<CR>
+noremap  <tab>   <C-^>
 noremap  )       gt
 noremap  (       gT
 noremap  <space> zz
@@ -89,6 +95,11 @@ inoremap <C-'>   <CR>
 inoremap lh      <Esc>
 inoremap kj      <Esc>:w<CR>
 noremap  K       i<CR><Esc>
+
+:map [[ ?{<CR>w99[{
+:map ][ /}<CR>b99]}
+:map ]] j0[[%/{<CR>
+:map [] k$][%?}<CR>
 "noremap     K   a <CR><Esc>k$
 noremap     <C-j>   5j
 noremap     <C-k>   5k
