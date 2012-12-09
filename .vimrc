@@ -37,6 +37,7 @@ let g:NERDTreeIgnore = ['\.pyc$', '\.aux']
 let g:nerdtree_tabs_open_on_console_startup = 1
 let g:NERDTreeShowLineNumbers = 1
 command! -nargs=1 E wincmd h | execute 'normal ' . <args> . 'G<enter>'
+command! -nargs=1 T wincmd h | execute 'normal ' . <args> . 'Gt'
 
 " vim-fugitive config
 autocmd BufReadPost fugitive://* set bufhidden=delete
@@ -85,10 +86,11 @@ noremap <F7> :set filetype=html <CR>
 "noremap  -       _
 "noremap  _       :bp<CR>
 "noremap  +       :bn<CR>
-noremap  <tab>   <C-^>
+noremap  -       O<Esc>jl
+noremap  <Tab>   <C-^>
 noremap  )       gt
 noremap  (       gT
-noremap  <space> zz
+noremap  <Space> zz
 noremap  <CR> gg
 imap     <C-\>   <Esc>o
 inoremap <C-'>   <CR>
@@ -110,7 +112,7 @@ noremap     <C-l>   :5winc > <CR>
 "file formatting
 noremap <leader>ah :%s/:\(\w\+\)\s*=>\s*\("[^"]*"\\|'[^']*'\\|{[^}]*}\\|\[[^\]]*\]\\|:\?\w\+\)/\1: \2/g<CR>
 vnoremap <leader>ar c<Esc>msjmtP'tk :'s+1,.g/^/m 's<CR>kdd
-noremap <leader>as :%s/\s\+\r\?$<CR>
+noremap <leader>as :%s/\s*\r\?$<CR>
 noremap <leader>af :%s/ﬁ/fi/g<CR>
 noremap <leader>a' :%s/"/'/gc<CR>
 "buffer
@@ -237,7 +239,8 @@ set colorcolumn=80
 set number
 set autoindent
 set autoread 
-set autowrite
+"set autowrite
+set hidden
 set formatoptions+=r
 set foldmethod=indent
 set foldlevel=99
