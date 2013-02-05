@@ -17,7 +17,7 @@ set background=dark
 
 " PLUGIN CONFIGS AND MAPPINGS
 set runtimepath-=~/.vim/bundle/minibufexpl
-"set runtimepath-=~/.vim/bundle/vim-autocomplpop
+set runtimepath-=~/.vim/bundle/vim-autocomplpop
 set runtimepath-=~/.vim/bundle/supertab
 "set runtimepath-=~/.vim/bundle/vim-persist
 
@@ -64,7 +64,7 @@ autocmd BufRead * :TagbarOpen
 
 " persist config
 set updatetime=1000
-let g:persist_width = 30
+let g:persist_width = 28
 autocmd BufRead * if exists(':PersistOpen') | :PersistOpen
 
 " indent/html.vim config
@@ -72,6 +72,8 @@ let g:html_indent_inctags = "html,body,head,tbody,template"
 
 " vim-indent-plugin
 let g:indent_guides_enable_on_vim_startup = 1
+
+let vimrplugin_screenplugin = 0
 
 
 " KEYMAPPINGS
@@ -83,10 +85,13 @@ noremap <F4> :TagbarOpen <CR> :PersistOpen <CR>
 noremap <F5> :NERDTreeToggle <CR>
 noremap <F7> :set filetype=html <CR>
 
-"noremap  -       _
 "noremap  _       :bp<CR>
 "noremap  +       :bn<CR>
-noremap  -       O<Esc>jl
+"noremap  -       O<Esc>jl
+noremap =- gg=G`'
+noremap  -       _
+noremap  _       :bp<CR>
+noremap  +       :bn<CR>
 noremap  <Tab>   <C-^>
 noremap  )       gt
 noremap  (       gT
@@ -98,10 +103,10 @@ inoremap lh      <Esc>
 inoremap kj      <Esc>:w<CR>
 noremap  K       i<CR><Esc>
 
-:map [[ ?{<CR>w99[{
-:map ][ /}<CR>b99]}
-:map ]] j0[[%/{<CR>
-:map [] k$][%?}<CR>
+map [[ ?{<CR>w99[{
+map ][ /}<CR>b99]}
+map ]] j0[[%/{<CR>
+map [] k$][%?}<CR>
 "noremap     K   a <CR><Esc>k$
 noremap     <C-j>   5j
 noremap     <C-k>   5k
@@ -182,6 +187,7 @@ noremap <leader>t2 :setlocal shiftwidth=2 tabstop=2 <CR>
 noremap <leader>t4 :setlocal shiftwidth=4 tabstop=4 <CR>
 noremap <leader>t8 :setlocal shiftwidth=8 tabstop=8 <CR>
 "tabular.vim
+vnoremap <leader>=g :Tab custom_tabs<CR>
 vnoremap <leader>=~ :Tab custom_tabs<CR>
 vnoremap <leader>=3 :Tab /#<CR>
 vnoremap <leader>=- :Tab space_align<CR>
@@ -203,6 +209,8 @@ cno $$ e ./
 
 
 " AUTOCMDS
+autocmd Filetype markdown syntax match Comment /\%^---\_.\{-}---$/
+
 au BufRead,BufNewFile .bash* set ft=sh
 au BufRead,BufNewFile *.php set ft=php.html
 au BufRead,BufNewFile *.js set ft=javascript.html
@@ -215,24 +223,12 @@ au BufRead,BufNewFile *.rabl set ft=ruby
 au BufRead,BufNewFile Gemfile* set ft=ruby
 au BufRead,BufNewFile Guardfile set ft=ruby
 
-au BufRead,BufNewFile *.coffee setlocal shiftwidth=2 tabstop=2
-au BufRead,BufNewFile *.json setlocal shiftwidth=2 tabstop=2
-au BufRead,BufNewFile *.html setlocal shiftwidth=2 tabstop=2
-au BufRead,BufNewFile *.erb setlocal shiftwidth=2 tabstop=2
-"autocmd FileType html :setlocal shiftwidth=2 tabstop=2
-au BufRead,BufNewFile *.h setlocal shiftwidth=8 tabstop=8 noexpandtab
-
-"au FileType python :setlocal shiftwidth=2 tabstop=2
-au FileType c :setlocal shiftwidth=8 tabstop=8 noexpandtab
-au FileType cpp :setlocal shiftwidth=4 tabstop=4
 au FileType ruby :setlocal shiftwidth=2 tabstop=2
-au FileType html :setlocal shiftwidth=2 tabstop=2
 au FileType jst :setlocal shiftwidth=2 tabstop=2
 au FileType tex :setlocal shiftwidth=2 tabstop=2 noexpandtab
 "autocmd Syntax c,cpp,vim,xml,html,xhtml setlocal foldmethod=indent
 
 au! FileType python setl nosmartindent
-
 
 " CONFIGS
 set colorcolumn=80
