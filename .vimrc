@@ -17,7 +17,8 @@ set background=dark
 
 " PLUGIN CONFIGS AND MAPPINGS
 set runtimepath-=~/.vim/bundle/minibufexpl
-set runtimepath-=~/.vim/bundle/vim-autocomplpop
+set runtimepath-=~/.vim/bundle/YouCompleteMe
+"set runtimepath-=~/.vim/bundle/vim-autocomplpop
 set runtimepath-=~/.vim/bundle/supertab
 "set runtimepath-=~/.vim/bundle/vim-persist
 
